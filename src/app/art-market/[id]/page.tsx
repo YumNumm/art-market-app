@@ -9,10 +9,10 @@ import {
 } from "@/components/ui/card";
 import { isValidUUIDv4 } from "@/util/is-valid-uuid";
 import { R2Objects } from "@cloudflare/workers-types";
+import { log } from "console";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import useSWR from "swr";
-
 const isValidId = (id: string) => {
   return isValidUUIDv4(id);
 };
@@ -20,9 +20,24 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 export default function Page({ params }: { params: { id: string } }) {
   const id = params.id;
-  if (!isValidId(id) && process.env.NODE_ENV !== "development") {
-    throw new Error("invalid id");
+  if (!isValidId(id)) {
+    return (
+      <>
+        <div className="flex h-screen items-center justify-center">
+          <h1 className="text-4xl font-bold">404 Not Found</h1>
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <Body id={id}></Body>
+      </>
+    );
   }
+}
+
+function Body({ id }: { id: string }) {
   // from env
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const { data, error, isLoading } = useSWR<{
@@ -49,10 +64,13 @@ export default function Page({ params }: { params: { id: string } }) {
                 </CardHeader>
                 <CardContent>
                   <Image
-                    src={process.env.OBJECT_STORAGE + obj.key}
+                    src={
+                      process.env.NEXT_PUBLIC_OBJECT_STORAGE_URL + "/" + obj.key
+                    }
                     alt={obj.key}
                     height={1000}
                     width={1000}
+                    priority={true}
                     style={{
                       maxWidth: "100%",
                       height: "auto",

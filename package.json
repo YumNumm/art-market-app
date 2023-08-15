@@ -33,6 +33,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.5.1",
     "@cloudflare/workers-types": "^4.20230814.0"
   }
 }

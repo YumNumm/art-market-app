@@ -1,20 +1,9 @@
-export type SiteConfig = typeof siteConfig
+export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "EQApi Monitor",
-  description:
-    "Beautifully designed components built with Radix UI and Tailwind CSS.",
-  mainNav: [
-    {
-      title: "Home",
-      href: "/",
-    },
-    {
-      title: "srv2-osaka",
-      href: "/srv2-osaka",
-    },
-  ],
+  name: "テッケン",
+  description: "東京藝術大学 テクノロジー研究会",
   links: {
-    github: "https://github.com/YumNumm/eqapi-monitor",
+    github: "https://github.com/YumNumm/art-market-app",
   },
-}
+};
