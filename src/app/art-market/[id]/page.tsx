@@ -17,7 +17,7 @@ const isValidId = (id: string) => {
   return isValidUUIDv4(id);
 };
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
-
+export const runtime = "edge";
 export default function Page({ params }: { params: { id: string } }) {
   const id = params.id;
   if (!isValidId(id)) {
