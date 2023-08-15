@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -9,14 +8,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { isValidUUIDv4 } from "@/util/is-valid-uuid";
-import { R2Object, R2Objects } from "@cloudflare/workers-types";
-import { Download, DownloadIcon, Loader2 } from "lucide-react";
+import { R2Objects } from "@cloudflare/workers-types";
+import { Loader2 } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import useSWR from "swr";
 
-export const isValidId = (id: string) => {
+const isValidId = (id: string) => {
   return isValidUUIDv4(id);
 };
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
