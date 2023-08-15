@@ -1,22 +1,60 @@
-import "./globals.css";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import "@/app/globals.css";
+import { Metadata } from "next";
 
-const inter = Inter({ subsets: ["latin"] });
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
+import { SiteHeader } from "@/components/site-header";
+import { TailwindIndicator } from "@/components/tailwind-indicator";
+import { ThemeProvider } from "@/components/theme-provider";
+import { memo } from "react";
 
 export const metadata: Metadata = {
-  title: "テッケン",
-  description: "東京藝術大学 テクノロジー研究会",
+  title: {
+    default: siteConfig.name,
+    template: `%s - ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+    { media: "(prefers-color-scheme: light)", color: "white" },
+  ],
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
+
+  viewport: {
+    width: "device-width",
+    viewportFit: "cover",
+    initialScale: 1.0,
+    maximumScale: 1.0,
+    minimumScale: 1.0,
+    userScalable: false,
+  },
 };
 
-export default function RootLayout({
-  children,
-}: {
+interface RootLayoutProps {
   children: React.ReactNode;
-}) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="ja">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <>
+      <html lang="ja">
+        <head />
+        <body
+          className={cn("min-h-screen bg-background font-sans antialiased")}
+        >
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <div className="relative flex min-h-screen flex-col">
+              <SiteHeader />
+              <div className="p-8">{children}</div>
+            </div>
+            <TailwindIndicator />
+          </ThemeProvider>
+        </body>
+      </html>
+    </>
   );
 }
