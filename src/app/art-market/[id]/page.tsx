@@ -1,4 +1,7 @@
 "use client";
+import { BackgroundNoise } from "@/components/backgroundNoise";
+import { SiteHeader } from "@/components/site-header";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   Card,
   CardContent,
@@ -11,6 +14,7 @@ import { isValidUUIDv4 } from "@/util/is-valid-uuid";
 import { R2Objects } from "@cloudflare/workers-types";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import useSWR from "swr";
 
 export const runtime = "edge";
@@ -19,21 +23,30 @@ const isValidId = (id: string) => {
   return isValidUUIDv4(id);
 };
 
+const notFound = (
+  <>
+    <SiteHeader />
+    <div className="flex h-screen items-center justify-center">
+      <h1 className="text-4xl font-bold">404 Page Not Found</h1>
+    </div>
+  </>
+);
+
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 export default function Page({ params }: { params: { id: string } }) {
   const id = params.id;
   if (!isValidId(id)) {
-    return (
-      <>
-        <div className="flex h-screen items-center justify-center">
-          <h1 className="text-4xl font-bold">404 Not Found</h1>
-        </div>
-      </>
-    );
+    return notFound;
   } else {
     return (
       <>
-        <Body id={id}></Body>
+        <div className="opacity-90">
+          <BackgroundNoise />
+        </div>
+        <div className="z-50">
+          <SiteHeader />
+        </div>
+        <Body id={id} />
       </>
     );
   }
@@ -53,10 +66,13 @@ function Body({ id }: { id: string }) {
       </div>
     );
   }
+  if (data?.result.objects.length === 0) {
+    return notFound;
+  }
   return (
     <>
-      <div className="grid grid-cols-[repeat(auto-fit, max(auto))] gap-2 ">
-        {data?.result.objects.map((obj) => {
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,auto))] gap-2 p-4">
+        {data?.result.objects.map((obj, index) => {
           let title = "";
           let description = "";
           /*
@@ -84,12 +100,12 @@ function Body({ id }: { id: string }) {
           }
           return (
             <>
-              <Card>
-                <CardHeader>
+              <Card className="z-10 shadow-2xl">
+                <CardHeader className="p-4">
                   <CardTitle>{title}</CardTitle>
                   <CardDescription>{description}</CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="p-3">
                   <Image
                     src={
                       process.env.NEXT_PUBLIC_OBJECT_STORAGE_URL + "/" + obj.key

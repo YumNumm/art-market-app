@@ -1,18 +1,45 @@
+"use client";
+
+import { BackgroundNoise } from "@/components/backgroundNoise";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+    <AnimatePresence>
+      <div className="min-h-[100vh] sm:min-h-screen w-screen flex flex-col relative font-inter overflow-hidden ">
+        <BackgroundNoise />
+        <main className="flex flex-col justify-center static md:fixed w-screen h-screen p-8 overflow-hidden z-50">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              delay: 0.1,
+              duration: 1.2,
+              ease: [0.165, 0.84, 0.44, 1],
+            }}
+          >
+            <Image
+              src="/logo.png"
+              alt="logo"
+              width={96}
+              height={96}
+              className="rounded-xl shadow-lg m-2"
+            />
+            <h1 className="relative font-extrabold text-4xl md:text-[130px] leading-[0.95]  ">
+              テッケン
+            </h1>
+            <h2 className="pt-4 relative text-2xl font-bold leading-[0.95] tracking-[-.5px] ">
+              東京藝術大学
+              <br />
+              テクノロジー研究会
+            </h2>
+            <h3 className="pt-4 relative font-bold leading-[0.95] tracking-[-.5px] opacity-80">
+              <code> Powered by Tokyo University of the Arts Technology</code>
+            </h3>
+          </motion.div>
+        </main>
       </div>
-    </main>
+    </AnimatePresence>
   );
 }

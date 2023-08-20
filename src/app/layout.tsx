@@ -56,12 +56,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <html lang="ja">
         <head />
         <body
-          className={cn("min-h-screen bg-background font-sans antialiased")}
+          className={cn(
+            "min-h-screen bg-background font-sans antialiased scroll-smooth"
+          )}
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="relative flex min-h-screen flex-col">
-              <SiteHeader />
-              <div className="p-8">{children}</div>
+            <div className="relative flex min-h-screen flex-col ">
+              {children}
             </div>
             <TailwindIndicator />
           </ThemeProvider>
