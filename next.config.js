@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
   trailingSlash: true,
   images: {
-    unoptimized: true,
+    domains: ["objects.tekken.work"],
   },
-  output: "export",
 };
 
 module.exports = nextConfig;
