@@ -24,9 +24,9 @@ export default function Home() {
               alt="logo"
               width={96}
               height={96}
-              className="rounded-xl shadow-lg m-2"
+              className="rounded-xl shadow-xl drop-shadow-xl mb-4"
             />
-            <h1 className="relative font-extrabold text-4xl md:text-[130px] leading-[0.95]  ">
+            <h1 className="relative font-black text-4xl md:text-[130px] leading-[0.95]  ">
               テッケン
             </h1>
             <h2 className="pt-4 relative text-2xl font-bold leading-[0.95] tracking-[-.5px] ">
@@ -34,8 +34,9 @@ export default function Home() {
               <br />
               テクノロジー研究会
             </h2>
-            <h3 className="pt-4 relative font-bold leading-[0.95] tracking-[-.5px] opacity-80">
-              <code> Powered by Tokyo University of the Arts Technology</code>
+            <h3 className="pt-2 font-mono relative leading-[0.95] tracking-[-.5px] opacity-80">
+              Tokyo University of the Arts
+              <br /> Technology Study Group
             </h3>
           </motion.div>
         </main>
