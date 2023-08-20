@@ -21,17 +21,19 @@ const isValidId = (id: string) => {
   return isValidUUIDv4(id);
 };
 
-const notFound = (
-  <>
-    <div className="flex h-screen items-center justify-center">
-      <h1 className="text-4xl font-bold">404 Page Not Found</h1>
-    </div>
-  </>
-);
-
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 export default function Page({ params }: { params: { id: string } }) {
   const id = params.id;
+
+  const notFound = (
+    <>
+      <div className="flex h-screen items-center justify-center col-auto flex-col">
+        <h1 className="text-4xl font-bold">404 Page Not Found</h1>
+        {/* id */}
+        <h2 className="text-sm opacity-50 p-4">id=&quot;{id}&quot;</h2>
+      </div>
+    </>
+  );
   if (!isValidId(id)) {
     return (
       <>
