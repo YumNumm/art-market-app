@@ -19,9 +19,13 @@ export const metadata: Metadata = {
     { media: "(prefers-color-scheme: light)", color: "white" },
   ],
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: "/favicons/favicon.ico",
+    shortcut: "/favicons/favicon-16x16.png",
+    apple: "/favicons/apple-touch-icon.png",
+  },
+  twitter: {
+    card: "summary_large_image",
+    
   },
 
   viewport: {
