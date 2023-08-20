@@ -3,13 +3,16 @@
 import { useEffect, useState } from "react";
 
 export function BackgroundNoise() {
-  const [noise, _] = useState([Math.random(), Math.random(), Math.random()]);
+  const [noise, setNoise] = useState([0, 0, 0]);
+  useEffect(() => {
+    setNoise([Math.random(), Math.random(), Math.random()]);
+  }, []);
   return (
     <svg
       className="fixed w-full h-full opacity-70"
       style={{
         backgroundImage:
-          "radial-gradient(circle at 12.5px 10px, lightgray 4%, transparent 0%), radial-gradient(circle at 37.5px 37.5px, lightgray 4%, transparent 0%)",
+          "radial-gradient(circle at 12.5px 10px, lightgray 3%, transparent 0%), radial-gradient(circle at 37.5px 37.5px, lightgray 3%, transparent 0%)",
         backgroundSize: "50px 50px",
       }}
     >
