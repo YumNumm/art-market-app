@@ -13,6 +13,8 @@ import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import useSWR from "swr";
 
+export const runtime = "edge";
+
 const isValidId = (id: string) => {
   return isValidUUIDv4(id);
 };
