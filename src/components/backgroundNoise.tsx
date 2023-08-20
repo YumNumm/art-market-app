@@ -1,6 +1,13 @@
 export function BackgroundNoise() {
   return (
-    <svg className="fixed w-full h-full opacity-70">
+    <svg
+      className="fixed w-full h-full opacity-70"
+      style={{
+        backgroundImage:
+          "radial-gradient(circle at 12.5px 10px, lightgray 4%, transparent 0%), radial-gradient(circle at 37.5px 37.5px, lightgray 4%, transparent 0%)",
+        backgroundSize: "50px 50px",
+      }}
+    >
       <filter id="noise">
         <feTurbulence
           type="fractalNoise"
