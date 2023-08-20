@@ -3,8 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
   images: {
-    domains: ["objects.tekken.work"]
-  }
+    domains: ["objects.tekken.work"],
+  },
 };
 
 module.exports = nextConfig;
