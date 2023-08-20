@@ -1,5 +1,6 @@
 "use client";
 
+import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 export function BackgroundNoise() {
@@ -7,12 +8,17 @@ export function BackgroundNoise() {
   useEffect(() => {
     setNoise([Math.random(), Math.random(), Math.random()]);
   }, []);
+  const { theme } = useTheme();
+  const isDark = theme == "dark";
+  console.log(theme);
+
   return (
     <svg
       className="fixed w-full h-full opacity-70"
       style={{
-        backgroundImage:
-          "radial-gradient(circle at 12.5px 10px, lightgray 3%, transparent 0%), radial-gradient(circle at 37.5px 37.5px, lightgray 3%, transparent 0%)",
+        backgroundImage: isDark
+          ? "radial-gradient(circle at 12.5px 10px, dimgray 3%, transparent 0%), radial-gradient(circle at 37.5px 37.5px, dimgray 3%, transparent 0%)"
+          : "radial-gradient(circle at 12.5px 10px, lightgray 3%, transparent 0%), radial-gradient(circle at 37.5px 37.5px, lightgray 3%, transparent 0%)",
         backgroundSize: "50px 50px",
       }}
     >
