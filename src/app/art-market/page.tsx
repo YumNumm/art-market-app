@@ -22,10 +22,19 @@ const isValidId = (id: string) => {
 };
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
+
+let notFound = (
+  <>
+    <div className="flex h-screen items-center justify-center col-auto flex-col">
+      <h1 className="text-4xl font-bold">404 Page Not Found</h1>
+    </div>
+  </>
+);
+
 export default function Page({ params }: { params: { id: string } }) {
   const id = params.id;
 
-  const notFound = (
+  notFound = (
     <>
       <div className="flex h-screen items-center justify-center col-auto flex-col">
         <h1 className="text-4xl font-bold">404 Page Not Found</h1>
