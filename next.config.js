@@ -6,11 +6,6 @@ const nextConfig = {
     unoptimized: true,
   },
   output: "export",
-  redirects: {
-    async redirects() {
-      return [{ source: "/art-market/:id", destination: "/art-market/" }];
-    },
-  },
 };
 
 module.exports = nextConfig;
