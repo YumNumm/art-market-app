@@ -25,7 +25,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    
+  },
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+    },
   },
 
   viewport: {

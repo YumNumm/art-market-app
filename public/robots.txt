@@ -1,6 +1,0 @@
-User-agent: Googlebot
-Disallow: /art-market/
-
-User-agent: *
-Allow: /
-
