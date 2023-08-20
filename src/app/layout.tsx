@@ -25,6 +25,31 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    title: "テッケン",
+    description: "東京藝術大学 テクノロジー研究会",
+    site: "https://tekken.work",
+    images: [
+      {
+        url: "https://tekken.work/ogp.png",
+        width: 2000,
+        height: 1000,
+      },
+    ],
+  },
+  openGraph: {
+    title: "テッケン",
+    description: "東京藝術大学 テクノロジー研究会",
+    url: "https://tekken.work",
+    siteName: "テッケン",
+    images: [
+      {
+        url: "https://tekken.work/ogp.png",
+        width: 2000,
+        height: 1000,
+      },
+    ],
+    locale: "ja_JP",
+    type: "website",
   },
   robots: {
     index: false,
