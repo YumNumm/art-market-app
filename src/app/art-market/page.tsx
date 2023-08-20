@@ -17,8 +17,6 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
 
-export const runtime = "edge";
-
 const isValidId = (id: string) => {
   return isValidUUIDv4(id);
 };
