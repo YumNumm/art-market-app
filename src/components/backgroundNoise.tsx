@@ -4,36 +4,38 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 export function BackgroundNoise() {
-  const [noise, setNoise] = useState([0, 0, 0]);
+  const [noise, setNoise] = useState({ x: 0, y: 0, z: 0 });
   useEffect(() => {
-    setNoise([Math.random(), Math.random(), Math.random()]);
+    setNoise({
+      x: Math.random(),
+      y: Math.random(),
+      z: Math.random(),
+    });
   }, []);
   const { theme } = useTheme();
   const isDark = theme == "dark";
-  console.log(theme);
+  const color = isDark ? "dimgray" : "lightgray";
 
   return (
     <svg
       className="fixed w-full h-full opacity-70"
       style={{
-        backgroundImage: isDark
-          ? "radial-gradient(circle at 12.5px 10px, dimgray 3%, transparent 0%), radial-gradient(circle at 37.5px 37.5px, dimgray 3%, transparent 0%)"
-          : "radial-gradient(circle at 12.5px 10px, lightgray 3%, transparent 0%), radial-gradient(circle at 37.5px 37.5px, lightgray 3%, transparent 0%)",
+        backgroundImage: `radial-gradient(circle at 12.5px 10px, ${color} 3%, transparent 0%), radial-gradient(circle at 37.5px 37.5px, ${color} 3%, transparent 0%)`,
         backgroundSize: "50px 50px",
       }}
     >
       <filter id="noise">
         <feTurbulence
           type="fractalNoise"
-          baseFrequency={(noise[0] * 3 + 1) / 1000}
+          baseFrequency={(noise.x * 3 + 1) / 1000}
           result="fractalNoise"
         />
         <feColorMatrix
           in="myComposite"
           type="matrix"
           values={`
-                0   0   0   0   ${noise[1] * 0.3 + 0.1}
-                0   0   0   0   ${noise[2] * 0.3 + 0.1}
+                0   0   0   0   ${noise.y * 0.3 + 0.1}
+                0   0   0   0   ${noise.z * 0.3 + 0.1}
                 0   0   0   0   1
                 0   0   0   1   0
                 `}
