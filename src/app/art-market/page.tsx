@@ -14,7 +14,7 @@ import { isValidUUIDv4 } from "@/util/is-valid-uuid";
 import { R2Objects } from "@cloudflare/workers-types";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 import useSWR from "swr";
 
 const isValidId = (id: string) => {
@@ -30,10 +30,9 @@ const notFound = (
 );
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
-export default function Page() {
-  const searchParams = useSearchParams();
-  const id = searchParams.get("id");
-  if (id == null || !isValidId(id)) {
+export default function Page({ params }: { params: { id: string } }) {
+  const id = params.id;
+  if (!isValidId(id)) {
     return (
       <>
         <div className="z-50">
