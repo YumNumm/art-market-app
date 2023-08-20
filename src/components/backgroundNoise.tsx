@@ -1,4 +1,9 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 export function BackgroundNoise() {
+  const [noise, _] = useState([Math.random(), Math.random(), Math.random()]);
   return (
     <svg
       className="fixed w-full h-full opacity-70"
@@ -11,15 +16,15 @@ export function BackgroundNoise() {
       <filter id="noise">
         <feTurbulence
           type="fractalNoise"
-          baseFrequency={(Math.random() * 3 + 1) / 1000}
+          baseFrequency={(noise[0] * 3 + 1) / 1000}
           result="fractalNoise"
         />
         <feColorMatrix
           in="myComposite"
           type="matrix"
           values={`
-                0   0   0   0   ${Math.random() * 0.3 + 0.1}
-                0   0   0   0   ${Math.random() * 0.3 + 0.1}
+                0   0   0   0   ${noise[1] * 0.3 + 0.1}
+                0   0   0   0   ${noise[2] * 0.3 + 0.1}
                 0   0   0   0   1
                 0   0   0   1   0
                 `}
