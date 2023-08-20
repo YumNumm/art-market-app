@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/card";
 import { isValidUUIDv4 } from "@/util/is-valid-uuid";
 import { R2Objects } from "@cloudflare/workers-types";
-import { log } from "console";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import useSWR from "swr";
@@ -53,14 +52,39 @@ function Body({ id }: { id: string }) {
   }
   return (
     <>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(400px,auto))] gap-2 ">
+      <div className="grid grid-cols-[repeat(auto-fit, max(auto))] gap-2 ">
         {data?.result.objects.map((obj) => {
+          let title = "";
+          let description = "";
+          /*
+            AA_L_1.png（かわいくピース AAver）
+            AA_L_2.png（うさみみポーズ AAver）
+            AA_L_3.png（おまかせポーズ AAver）
+            comp_L_1.png（かわいくピース クロマキーver）
+            comp_L_2.png（うさみみポーズ クロマキーver）
+            comp_L_3.png（おまかせ クロマキーver）
+            ※comp_L_1~3はアルファチャンネル付きです
+          */
+          const filename = obj.key.split("/")[1];
+
+          if (filename.endsWith("_1.png")) {
+            title = "かわいくピース";
+          } else if (filename.endsWith("_2.png")) {
+            title = "うさみみポーズ";
+          } else if (filename.endsWith("_3.png")) {
+            title = "おまかせポーズ";
+          }
+          if (filename.startsWith("AA")) {
+            description = "アスキーアートver";
+          } else if (filename.startsWith("comp")) {
+            description = "クロマキーver";
+          }
           return (
             <>
               <Card>
                 <CardHeader>
-                  <CardTitle>Card Title</CardTitle>
-                  <CardDescription>Card Desc</CardDescription>
+                  <CardTitle>{title}</CardTitle>
+                  <CardDescription>{description}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <Image
