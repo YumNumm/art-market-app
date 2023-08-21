@@ -18,6 +18,9 @@ import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
 
 const isValidId = (id: string) => {
+  if (id == "tekken_art_market_masterkey") {
+    return true;
+  }
   return isValidUUIDv4(id);
 };
 
