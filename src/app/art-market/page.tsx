@@ -35,13 +35,18 @@ class ApiError extends Error {
   }
 }
 
-const notFound = (
-  <>
-    <div className="flex h-screen items-center justify-center">
-      <h1 className="text-4xl font-bold font-mono">404 Page Not Found</h1>
-    </div>
-  </>
-);
+function NotFound({ message }: { message: string }) {
+  return (
+    <>
+      <div className="flex h-screen items-center justify-center flex-col">
+        <h1 className="text-4xl font-bold font-mono">404 Page Not Found</h1>
+        <h2 className="text-2xl font-bold font-mono text-center opacity-70">
+          {message}
+        </h2>
+      </div>
+    </>
+  );
+}
 
 const fetcher = async (url: string) => {
   const res = await fetch(url);
@@ -69,7 +74,10 @@ export default function Page() {
         <div className="z-50">
           <SiteHeader />
         </div>
-        {notFound}
+        <NotFound message="Invalid User ID." />
+        <h2 className="text-2xl font-bold font-mono text-center opacity-70">
+          Invalid User ID
+        </h2>
       </>
     );
   } else {
@@ -117,7 +125,11 @@ function Body({ id }: { id: string }) {
     );
   }
   if (data?.result.objects.length === 0) {
-    return notFound;
+    return (
+      <>
+        <NotFound message="Data Not Found." />
+      </>
+    );
   }
   return (
     <>

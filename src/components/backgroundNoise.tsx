@@ -31,7 +31,6 @@ export function BackgroundNoise() {
           result="fractalNoise"
         />
         <feColorMatrix
-          in="myComposite"
           type="matrix"
           values={`
                 0   0   0   0   ${noise.y * 0.3 + 0.1}
