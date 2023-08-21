@@ -24,6 +24,17 @@ const isValidId = (id: string) => {
   return isValidUUIDv4(id);
 };
 
+class ApiError extends Error {
+  info: any;
+  status: number;
+
+  constructor(message: string, info: any, status: number) {
+    super(message);
+    this.info = info;
+    this.status = status;
+  }
+}
+
 const notFound = (
   <>
     <div className="flex h-screen items-center justify-center">
@@ -32,7 +43,23 @@ const notFound = (
   </>
 );
 
-const fetcher = (url: string) => fetch(url).then((r) => r.json());
+const fetcher = async (url: string) => {
+  const res = await fetch(url);
+
+  // もしステータスコードが 200-299 の範囲内では無い場合、
+  // レスポンスをパースして投げようとします。
+  if (!res.ok) {
+    const error = new ApiError(
+      "An error occurred while fetching the data.",
+      await res.json(),
+      res.status
+    );
+    throw error;
+  }
+
+  return res.json();
+};
+
 export default function Page() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
@@ -66,7 +93,22 @@ function Body({ id }: { id: string }) {
   const { data, error, isLoading } = useSWR<{
     result: R2Objects;
   }>(baseUrl + "/list/" + id, fetcher);
-  if (error) return <div>failed to load {JSON.stringify(error)}</div>;
+  if (error) {
+    return (
+      <>
+        <div className="flex h-screen items-center justify-center flex-col">
+          <h1 className="text-4xl font-bold">
+            データ取得中に例外が発生しました
+          </h1>
+          <p className="text-2xl font-bold font-mono">{error.message}</p>
+          <p className="text-xl font-mono opacity-70">
+            {JSON.stringify(error.info)}
+          </p>
+          <p className="text-xl font-mono opacity-70">Status: {error.status}</p>
+        </div>
+      </>
+    );
+  }
   if (isLoading) {
     return (
       <div className="flex h-screen items-center justify-center">
