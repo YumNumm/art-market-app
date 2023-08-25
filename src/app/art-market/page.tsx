@@ -124,7 +124,9 @@ function Body({ id }: { id: string }) {
       </div>
     );
   }
-  if (data?.result.objects.length === 0) {
+  const items =
+    data?.result.objects.filter((e) => !e.key.includes("temp")) ?? [];
+  if (items.length == 0) {
     return (
       <>
         <NotFound message="Data Not Found." />
@@ -134,12 +136,10 @@ function Body({ id }: { id: string }) {
   return (
     <>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,auto))] gap-2 p-4">
-        {data?.result.objects
-          .filter((e) => !e.key.includes("temp"))
-          .map((obj, index) => {
-            let title = "";
-            let description = "";
-            /*
+        {items.map((obj, index) => {
+          let title = "";
+          let description = "";
+          /*
             AA_L_1.png（かわいくピース AAver）
             AA_L_2.png（うさみみポーズ AAver）
             AA_L_3.png（おまかせポーズ AAver）
@@ -148,50 +148,48 @@ function Body({ id }: { id: string }) {
             comp_L_3.png（おまかせ クロマキーver）
             ※comp_L_1~3はアルファチャンネル付きです
           */
-            const filename = obj.key.split("/")[1];
+          const filename = obj.key.split("/")[1];
 
-            if (filename.endsWith("_1.png")) {
-              title = "かわいくピース";
-            } else if (filename.endsWith("_2.png")) {
-              title = "うさみみポーズ";
-            } else if (filename.endsWith("_3.png")) {
-              title = "おまかせポーズ";
-            }
-            if (filename.startsWith("AA")) {
-              description = "アスキーアートver";
-            } else if (filename.startsWith("comp")) {
-              description = "クロマキーver";
-            }
-            return (
-              <>
-                <Card className="z-10 shadow-2xl">
-                  <CardHeader className="p-4">
-                    <CardTitle>{title}</CardTitle>
-                    <CardDescription>{description}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="p-3">
-                    <Image
-                      src={
-                        process.env.NEXT_PUBLIC_OBJECT_STORAGE_URL +
-                        "/" +
-                        obj.key
-                      }
-                      alt={obj.key}
-                      height={1000}
-                      width={1000}
-                      priority={true}
-                      style={{
-                        maxWidth: "100%",
-                        height: "auto",
-                      }}
-                      className="rounded-sm backdrop-blur-md"
-                    />
-                  </CardContent>
-                  <CardFooter></CardFooter>
-                </Card>
-              </>
-            );
-          })}
+          if (filename.endsWith("_1.png")) {
+            title = "かわいくピース";
+          } else if (filename.endsWith("_2.png")) {
+            title = "うさみみポーズ";
+          } else if (filename.endsWith("_3.png")) {
+            title = "おまかせポーズ";
+          }
+          if (filename.startsWith("AA")) {
+            description = "アスキーアートver";
+          } else if (filename.startsWith("comp")) {
+            description = "クロマキーver";
+          }
+          return (
+            <>
+              <Card className="z-10 shadow-2xl">
+                <CardHeader className="p-4">
+                  <CardTitle>{title}</CardTitle>
+                  <CardDescription>{description}</CardDescription>
+                </CardHeader>
+                <CardContent className="p-3">
+                  <Image
+                    src={
+                      process.env.NEXT_PUBLIC_OBJECT_STORAGE_URL + "/" + obj.key
+                    }
+                    alt={obj.key}
+                    height={1000}
+                    width={1000}
+                    priority={true}
+                    style={{
+                      maxWidth: "100%",
+                      height: "auto",
+                    }}
+                    className="rounded-sm backdrop-blur-md"
+                  />
+                </CardContent>
+                <CardFooter></CardFooter>
+              </Card>
+            </>
+          );
+        })}
       </div>
     </>
   );
