@@ -126,6 +126,16 @@ function Body({ id }: { id: string }) {
   }
   const items =
     data?.result.objects.filter((e) => !e.key.includes("temp")) ?? [];
+  // compから始まるものを先頭に
+  items.sort((a, b) => {
+    if (a.key.startsWith("comp") && !b.key.startsWith("comp")) {
+      return -1;
+    } else if (!a.key.startsWith("comp") && b.key.startsWith("comp")) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
   if (items.length == 0) {
     return (
       <>
