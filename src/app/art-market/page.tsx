@@ -129,9 +129,9 @@ function Body({ id }: { id: string }) {
   // compから始まるものを先頭に
   items.sort((a, b) => {
     if (a.key.startsWith("comp") && !b.key.startsWith("comp")) {
-      return -1;
-    } else if (!a.key.startsWith("comp") && b.key.startsWith("comp")) {
       return 1;
+    } else if (!a.key.startsWith("comp") && b.key.startsWith("comp")) {
+      return -1;
     } else {
       return 0;
     }
