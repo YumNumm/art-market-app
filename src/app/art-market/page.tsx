@@ -153,10 +153,10 @@ function Body({ id }: { id: string }) {
             AA_L_1.png（かわいくピース AAver）
             AA_L_2.png（うさみみポーズ AAver）
             AA_L_3.png（おまかせポーズ AAver）
-            comp_L_1.png（かわいくピース クロマキーver）
-            comp_L_2.png（うさみみポーズ クロマキーver）
-            comp_L_3.png（おまかせ クロマキーver）
-            ※comp_L_1~3はアルファチャンネル付きです
+            results_L_1.png（かわいくピース クロマキーver）
+            results_L_2.png（うさみみポーズ クロマキーver）
+            results_L_3.png（おまかせ クロマキーver）
+            ※ results_L_1~3はアルファチャンネル付きです
           */
           const filename = obj.key.split("/")[1];
 
@@ -169,7 +169,7 @@ function Body({ id }: { id: string }) {
           }
           if (filename.startsWith("AA")) {
             description = "アスキーアートver";
-          } else if (filename.startsWith("comp")) {
+          } else if (filename.startsWith("result")) {
             description = "クロマキーver";
           }
           return (
