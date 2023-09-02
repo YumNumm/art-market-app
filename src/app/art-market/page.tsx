@@ -12,11 +12,10 @@ import {
 } from "@/components/ui/card";
 import { isValidUUIDv4 } from "@/util/is-valid-uuid";
 import { R2Objects } from "@cloudflare/workers-types";
-import { Loader2 } from "lucide-react";
+import { Loader2, TwitchIcon, TwitterIcon } from "lucide-react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import useSWR from "swr";
-
 const isValidId = (id: string) => {
   if (id == "tekken_art_market_masterkey") {
     return true;
@@ -86,9 +85,10 @@ export default function Page() {
         <div className="opacity-90">
           <BackgroundNoise />
         </div>
-        <div className="z-50">
+        <div className="z-30">
           <SiteHeader />
         </div>
+
         <Body id={id} />
       </>
     );
@@ -145,6 +145,17 @@ function Body({ id }: { id: string }) {
   }
   return (
     <>
+      <div className="flex flex-col items-center justify-center">
+        {/* Tweet Button */}
+        <div className=" z-50 gap-4 p-4">
+          <a
+            href="https://twitter.com/share?text=東京藝術大学 テクノロジー研究会で写真を撮ったよ!&hashtags=テッケン,藝祭2023,アトマ"
+            className="twitter-share-button"
+            data-show-count="true"
+          />
+          <script async src="https://platform.twitter.com/widgets.js" />
+        </div>
+      </div>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,auto))] gap-2 p-4">
         {items.map((obj, index) => {
           let title = "";
