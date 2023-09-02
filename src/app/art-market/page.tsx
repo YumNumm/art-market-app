@@ -147,13 +147,13 @@ function Body({ id }: { id: string }) {
     <>
       <div className="flex flex-col items-center justify-center">
         {/* Tweet Button */}
+        <script async src="https://platform.twitter.com/widgets.js" />
         <div className=" z-50 gap-4 p-4">
           <a
             href="https://twitter.com/share?text=東京藝術大学 テクノロジー研究会で写真を撮ったよ!&hashtags=テッケン,藝祭2023,アトマ"
             className="twitter-share-button"
             data-show-count="true"
           />
-          <script async src="https://platform.twitter.com/widgets.js" />
         </div>
       </div>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,auto))] gap-2 p-4">
