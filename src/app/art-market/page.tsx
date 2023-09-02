@@ -125,7 +125,9 @@ function Body({ id }: { id: string }) {
     );
   }
   const items =
-    data?.result.objects.filter((e) => !e.key.includes("temp")) ?? [];
+    data?.result.objects
+      .filter((e) => !e.key.includes("temp"))
+      .filter((e) => e.key.includes("L")) ?? [];
   // compから始まるものを先頭に
   items.sort((a, b) => {
     if (a.key.startsWith("comp") && !b.key.startsWith("comp")) {
